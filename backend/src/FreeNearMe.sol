@@ -2,6 +2,20 @@
 pragma solidity ^0.8.22;
 
 /**
+* @dev Enum for the different kinds of services, values are self-explanatory
+*/
+enum  ServiceType {
+    Bathroom,
+    Water,
+    WiFi,
+    AirPump,
+    BikeWorkshop,
+    Workstation,
+    ATM,
+    Other
+}
+
+/**
 * @title FreeNearMe
 * @dev System for sharing free services in the neighborhood.
 */
@@ -37,25 +51,12 @@ contract FreeNearMe {
     }
 
     /**
-    * @dev Enum for the different kinds of services, values are self-explanatory
-    */
-    enum  ServiceType {
-        Bathroom,
-        Water,
-        WiFi,
-        AirPump,
-        BikeWorkshop,
-        Workstation,
-        ATM,
-        Other
-    }
-
-    /**
     * @dev Structure for a service update
     * @param serviceId ID of the service
     * @param kind Service type
     */
     struct Update {
+        uint256 serviceId;
         string desc;
         uint256 timestamp;
     }
@@ -63,18 +64,18 @@ contract FreeNearMe {
     /// @dev Minimal amount of sponsores required to do writes to the contract.
     uint minSponsors;
     /// @notice Sponsors that a user has. If it has enough it can submit/update services.
-    mapping (address => uint256) sponsorsReceived;
+    mapping (address => uint256) public sponsorsReceived;
     /// @dev Fast way to find if address1 sponsored address2 (in that order in the mapping).
     mapping (address => mapping(address => bool)) sponsorsGiven;
     /// @notice Submited services.
-    Service[] services;
+    Service[] public services;
     /// @notice Updates to the services, e.g., bathroom out of order.
     /// @dev Map serviceId => Array of updates
-    mapping (uint256 => Update[]) servicesUpdates;
+    mapping (uint256 => Update[]) public servicesUpdates;
 
     /// @dev citylat and citylong are coordinates truncated to first decimal, this means aprox 11km precision 
     event ServiceRegistered(uint serviceId, int64 lat, int64 long, int16 indexed citylat, int16 indexed citylong, ServiceType indexed kind);
-    event ServiceUpdate(uint indexed serviceId, string desc);
+    event ServiceUpdate(uint indexed serviceId, string desc, uint256 timestamp);
     
     /// @dev We start the contract with a seed of trusted users.
     constructor(uint8 _minSponsors, address[] memory initialAddresses) {
@@ -154,11 +155,12 @@ contract FreeNearMe {
         require(keccak256(abi.encode(desc)) != keccak256(abi.encode("")), "Update description cannot be empty.");
 
         Update memory update;
+        update.serviceId = id;
         update.desc = desc;
         update.timestamp = timestamp;
         servicesUpdates[id].push(update);
 
-        emit ServiceUpdate(id, desc);
+        emit ServiceUpdate(id, desc, timestamp);
     }
 
     /**
