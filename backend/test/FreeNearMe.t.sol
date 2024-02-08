@@ -138,4 +138,19 @@ contract CounterTest is Test {
         fnm.submitServiceUpdate(su1.serviceId, su1.desc, su1.timestamp);
     }
 
+    function test_RevertWhen_SubmitServiceUpdateInvalidID() public {
+        vm.prank(user1);
+        vm.expectRevert(bytes("Invalid service ID."));
+        fnm.submitServiceUpdate(1000, su1.desc, su1.timestamp);
+    }
+
+    function test_RevertWhen_SubmitServiceUpdateEmptyDesc() public {
+        vm.prank(user1);
+        fnm.submitService(service1.kind, service1.desc, service1.lat, service1.long);
+
+        vm.prank(user1);
+        vm.expectRevert(bytes("Update description cannot be empty."));
+        fnm.submitServiceUpdate(0, "", su1.timestamp);
+    }
+
 }
