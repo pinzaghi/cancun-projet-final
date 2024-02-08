@@ -4,7 +4,7 @@ pragma solidity ^0.8.22;
 /**
 * @dev Enum for the different kinds of services, values are self-explanatory
 */
-enum  ServiceType {
+enum ServiceType {
     Bathroom,
     Water,
     WiFi,
@@ -95,7 +95,6 @@ contract FreeNearMe {
 
     function _sponsorUser(address addressToSponsor, address sponsorAddress) internal {
         require(addressToSponsor != address(0), "Invalid address.");
-        require(sponsorAddress != address(0), "Invalid address.");
         sponsorsReceived[addressToSponsor]++;
         sponsorsGiven[sponsorAddress][addressToSponsor] = true;
     }
