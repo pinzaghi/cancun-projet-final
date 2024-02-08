@@ -1,4 +1,32 @@
-# cancun-projet-final
+# FreeNearMe
+
+## Backend
+
+Create a .env file:
+```shell
+touch backend/.env
+```
+
+Set the constants:
+```
+SEPOLIA_RPC_URL={e.g., Alchemy App API Key}
+PRIVATE_KEY={Anvil private key if local, wallet private key if testnet}
+ETHERSCAN_API_KEY={Etherscan api key}
+SEED_ADDRESS_VALUES={A list of comma separated public addresses}
+```
+
+Deploy locally:
+```shell
+$ cd backend/
+$ anvil
+$ forge script script/FreeNearMe.s.sol:DeployScript --fork-url http://localhost:8545 --broadcast
+```
+
+Deploy to Sepolia:
+```shell
+source .env
+forge script script/FreeNearMe.s.sol:DeployScript --rpc-url $SEPOLIA_RPC_URL --etherscan-api-key $ETHERSCAN_API_KEY --broadcast --verify -vvvv
+```
 
 ## Test and coverage
 
