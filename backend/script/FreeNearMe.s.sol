@@ -15,7 +15,7 @@ contract DeployScript is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        FreeNearMe fnm = new FreeNearMe(1, seed);
+        FreeNearMe fnm = new FreeNearMe(uint8(seed.length), seed);
 
         vm.stopBroadcast();
     }
