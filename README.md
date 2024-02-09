@@ -1,5 +1,21 @@
 # FreeNearMe
 
+## Installation
+
+```shell
+cd backend/
+forge install
+cd frontend/
+npm install
+```
+
+## Frontend
+
+```shell
+cd frontend/
+npx next dev
+```
+
 ## Backend
 
 Create a .env file:
