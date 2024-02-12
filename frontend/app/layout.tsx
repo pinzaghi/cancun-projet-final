@@ -18,7 +18,11 @@ export default function RootLayout({
         <head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </head>
-        <body>{children}</body>
+        <body>
+          <div className="flex-1 space-y-4 p-8 pt-6">
+          {children}
+          </div>
+          </body>
       </html>
     )
 }
