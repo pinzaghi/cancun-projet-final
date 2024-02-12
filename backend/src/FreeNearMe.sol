@@ -12,6 +12,7 @@ enum ServiceType {
     BikeWorkshop,
     Workstation,
     ATM,
+    ChargingStation,
     Other
 }
 
