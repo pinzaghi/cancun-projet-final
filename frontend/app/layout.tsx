@@ -17,6 +17,7 @@ export default function RootLayout({
       <html lang="en">
         <head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="shortcut icon" href="/static/favicon.svg" />
         </head>
         <body>
           <div className="flex-1 space-y-4 p-8 pt-6">
