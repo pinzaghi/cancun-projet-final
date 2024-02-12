@@ -74,7 +74,7 @@ contract FreeNearMe {
     mapping (uint256 => Update[]) public servicesUpdates;
 
     /// @dev citylat and citylong are coordinates truncated to first decimal, this means aprox 11km precision 
-    event ServiceRegistered(uint serviceId, int64 lat, int64 long, int16 indexed citylat, int16 indexed citylong, ServiceType indexed kind);
+    event ServiceRegistered(uint serviceId, string desc, int64 lat, int64 long, int16 indexed citylat, int16 indexed citylong, ServiceType indexed kind);
     event ServiceUpdate(uint indexed serviceId, string desc, uint256 timestamp);
     
     /// @dev We start the contract with a seed of trusted users.
@@ -140,7 +140,7 @@ contract FreeNearMe {
         service.citylong = citylong;
         services.push(service);
 
-        emit ServiceRegistered(services.length-1, lat, long, citylat, citylong, kind);
+        emit ServiceRegistered(services.length-1, desc, lat, long, citylat, citylong, kind);
     }
 
     /**
