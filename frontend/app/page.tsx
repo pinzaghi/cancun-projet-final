@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react';
+
 import ServicesSearchControls from "@/components/ServicesSearchControls"
 import {
     Card,
@@ -12,13 +14,20 @@ import {
 import { Radar } from 'lucide-react';
 import { Separator } from "@/components/ui/separator"
 
-import { useState } from 'react';
+import ServicesMapRenderer from "@/components/ServicesMapRenderer";
 
 export default function Page() {
-    const [displayedService, setDisplayedService] = useState(null);
+    const [servicesFilter, setServicesFilter] = useState(null);
+    const [services, setServices] = useState([]);
 
-    const serviceRender = (serviceKind) => {
-        setDisplayedService(serviceKind);
+    const serviceSearch = (serviceKind, serviceDesc) => {
+        if(serviceDesc != ""){
+
+        }else{
+            setServicesFilter(serviceKind);
+            setServices(["test1","test2"]);
+        }
+        
     }
 
     return  <>
@@ -27,15 +36,15 @@ export default function Page() {
                     <span className="font-bold">FreeNearMe</span>
                 </span>
                 <Separator />
-                <div className="grid md:grid-cols-3 gap-4">
-                    <Card className="md:col-span-2">
+                <div className="grid md:grid-cols-4 gap-4">
+                    <Card className="md:col-span-3">
                         <CardContent>
-                            {displayedService}
+                            <ServicesMapRenderer serviceToRender={services}/>
                         </CardContent>
                     </Card>
                     <Card>
                         <CardContent>
-                            <ServicesSearchControls serviceRender={serviceRender}/>
+                            <ServicesSearchControls serviceSearch={serviceSearch}/>
                         </CardContent>
                     </Card>
                 </div>
