@@ -22,12 +22,11 @@ export default function Page() {
     }
 
     return  <>
-                
-                    <span className="flex items-center"><Radar className="mr-2"/> FreeNearMe </span>
-                
-
+                <span className="flex items-center">
+                    <Radar className="mr-2"/> 
+                    <span className="font-bold">FreeNearMe</span>
+                </span>
                 <Separator />
-
                 <div className="grid md:grid-cols-3 gap-4">
                     <Card className="md:col-span-2">
                         <CardContent>
@@ -35,9 +34,6 @@ export default function Page() {
                         </CardContent>
                     </Card>
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Services</CardTitle>
-                        </CardHeader>
                         <CardContent>
                             <ServicesSearchControls serviceRender={serviceRender}/>
                         </CardContent>

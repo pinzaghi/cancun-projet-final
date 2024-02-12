@@ -8,6 +8,7 @@ import {
     Wind, 
     CircleDollarSign, 
     LampDesk, 
+    PlugZap,
     Search } from 'lucide-react';
 
 import { Button } from "@/components/ui/button"
@@ -25,7 +26,8 @@ export default function ServicesSearchControls({serviceRender}) {
     }
 
     return (
-        <div className="grid md:grid-cols-1 gap-4">  
+        <div className="grid md:grid-cols-1 gap-4 mt-4">  
+            <span className="font-bold">Select a service:</span>
             <div className="grid md:grid-cols-4 gap-4">
                 <Button variant="outline" onClick={() => serviceToDisplay("Bathroom")}> <Users/> Bathroom </Button>
                 <Button variant="outline" onClick={() => serviceToDisplay("WiFi")}> <Wifi/> WiFi </Button>
@@ -34,11 +36,12 @@ export default function ServicesSearchControls({serviceRender}) {
                 <Button variant="outline" onClick={() => serviceToDisplay("AirPump")}> <Wind/> Air pump </Button>
                 <Button variant="outline" onClick={() => serviceToDisplay("Workstation")}> <LampDesk/> Workstation </Button>
                 <Button variant="outline" onClick={() => serviceToDisplay("ATM")}> <CircleDollarSign/> ATM </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("Other")}> <Search/> Other </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("Charge")}> <PlugZap/> Charging station </Button>
             </div>
+            <span className="font-bold">Or describe it:</span>
             <div>
                 <div className="flex items-center">
-                    <Label htmlFor="otherServiceKind">Describe your service</Label>
+                    <Search className="mr-2"/>
                     <Input id="otherServiceKind"/> 
                 </div>
             </div>
