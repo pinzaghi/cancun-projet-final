@@ -9,7 +9,7 @@ import {
     useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-import "leaflet-defaulticon-compatibility";
+import 'leaflet-defaulticon-compatibility';
 
 function LocationMarker() {
   const [position, setPosition] = useState(null)
@@ -28,20 +28,20 @@ function LocationMarker() {
   return null
 }
 
-export default function Map({Markers}) {
+export default function Map({coords}) {
   return (
-    <main>
-        <div id="map">
         <MapContainer center={[48.8551921,2.3415163]} zoom={13} scrollWheelZoom={true} style={{height: "100%", width: "100%"}}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
-        <Markers />
+        {coords.length > 0 && coords.map((position, index) => (
+          <Marker key={index} position={position}>
+              <Popup>test</Popup>
+          </Marker>
+        ))}
         <LocationMarker />
       </MapContainer>
-        </div>
-      </main>
-
+    
   )
 }
