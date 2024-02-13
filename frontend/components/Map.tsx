@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 
 import { 
@@ -15,7 +16,8 @@ function LocationMarker() {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng)
-      map.flyTo(e.latlng, map.getZoom())
+      //TODO: remove comment
+      //map.flyTo(e.latlng, map.getZoom())
     },
   })
 
@@ -23,32 +25,23 @@ function LocationMarker() {
     map.locate()
   }
   
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
-  )
+  return null
 }
 
-const Map = () => {
+export default function Map({Markers}) {
   return (
-    <>
-      <MapContainer center={[48.8551921,2.3415163]} zoom={13} scrollWheelZoom={true} style={{height: "100%", width: "100%"}}>
+    <main>
+        <div id="map">
+        <MapContainer center={[48.8551921,2.3415163]} zoom={13} scrollWheelZoom={true} style={{height: "100%", width: "100%"}}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
+        <Markers />
         <LocationMarker />
-
-        {/* {services.map((service, index) => (
-          <Marker key={index} position={service}>
-            <Popup>test</Popup>
-          </Marker>
-        ))} */}
       </MapContainer>
-    </>
-    
+        </div>
+      </main>
+
   )
 }
-
-export default Map

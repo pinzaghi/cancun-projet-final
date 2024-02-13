@@ -76,5 +76,5 @@
   button svg {
     @apply m-2
   }
-  #map { height: 700px; }
+  #map { @apply h-[75vh]; }
 }
