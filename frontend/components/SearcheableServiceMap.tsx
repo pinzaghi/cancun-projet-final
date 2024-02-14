@@ -17,8 +17,6 @@ export default function SercheableServiceMap() {
         if(serviceDesc != ""){
 
         }else{
-            console.log(serviceKind);
-
             if(serviceKind === "Bathroom"){
                 setServices([[48.860673, 2.337514], [48.842946, 2.321943]]);
             }else{
