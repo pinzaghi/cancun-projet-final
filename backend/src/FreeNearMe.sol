@@ -82,6 +82,7 @@ contract FreeNearMe {
     constructor(uint8 _minSponsors, address[] memory initialAddresses) {
         require(_minSponsors > 0);
         require(initialAddresses.length == _minSponsors);
+        require(_minSponsors < 10); // Avoid DoS gas limit
 
         minSponsors = _minSponsors;
 
