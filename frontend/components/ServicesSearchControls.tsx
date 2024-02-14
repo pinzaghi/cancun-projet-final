@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react';
-
 import { 
     Users, 
     Wifi, 
@@ -25,15 +23,15 @@ export default function ServicesSearchControls({serviceSearch}) {
     return (
         <div className="grid md:grid-cols-1 gap-4 mt-4">  
             <span className="font-bold">Select a service:</span>
-            <div className="grid md:grid-cols-3 gap-4">
-                <Button variant="outline" onClick={() => serviceToDisplay("Bathroom")}> <Users/> Bathroom </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("WiFi")}> <Wifi/> WiFi </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("Water")}> <GlassWater/> Water </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("BikeWorkshop")}> <Wrench/> Bike workshop </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("AirPump")}> <Wind/> Air pump </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("Workstation")}> <LampDesk/> Workstation </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("ATM")}> <CircleDollarSign/> ATM </Button>
-                <Button variant="outline" onClick={() => serviceToDisplay("ChargingStation")}> <PlugZap/> Charging station </Button>
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-3 gap-4">
+                <Button variant="outline" onClick={() => serviceToDisplay("Bathroom")}> <Users/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Bathroom</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("WiFi")}> <Wifi/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">WiFi</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("Water")}> <GlassWater/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Water</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("BikeWorkshop")}> <Wrench/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Bike SOS</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("AirPump")}> <Wind/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Air pump</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("Workstation")}> <LampDesk/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Workstation</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("ATM")}> <CircleDollarSign/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">ATM</span> </Button>
+                <Button variant="outline" onClick={() => serviceToDisplay("ChargingStation")}> <PlugZap/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Charging</span> </Button>
             </div>
             <span className="font-bold">Or describe it:</span>
             <div>

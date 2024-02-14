@@ -74,7 +74,7 @@
     @apply bg-background text-foreground;
   }
   button svg {
-    @apply m-2
+    @apply mr-2 my-2
   }
-  #map { height: 700px; }
+  #map { @apply h-[75vh]; }
 }
