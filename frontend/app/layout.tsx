@@ -20,10 +20,10 @@ export default function RootLayout({
           <link rel="shortcut icon" href="/static/favicon.svg" />
         </head>
         <body>
-          <div className="flex-1 space-y-4 p-8 pt-6">
+          <main className="flex-1 space-y-4 p-8 pt-6">
           {children}
-          </div>
-          </body>
+          </main>
+        </body>
       </html>
     )
 }

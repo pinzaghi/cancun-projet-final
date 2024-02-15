@@ -3,6 +3,7 @@ import SearcheableServiceMap from "@/components/SearcheableServiceMap"
 
 import { Radar } from 'lucide-react';
 import { Separator } from "@/components/ui/separator"
+import { Toaster } from "@/components/ui/toaster"
 
 export default function Page() {
     return <>
@@ -12,5 +13,6 @@ export default function Page() {
                     </span>
                 <Separator />
                 <SearcheableServiceMap/>
+                <Toaster/>
             </>
 }

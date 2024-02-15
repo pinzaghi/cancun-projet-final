@@ -37,7 +37,8 @@ export default function ServicesSearchControls({serviceSearch}) {
             <div>
                 <div className="flex items-center">
                     <Search className="mr-2"/>
-                    <Input id="otherServiceKind"/> 
+                    <Input placeholder="Service keywords" className="mr-2" id="otherServiceKind"/> 
+                    <Button>Search</Button>
                 </div>
             </div>
         </div>
