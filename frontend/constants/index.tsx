@@ -1,6 +1,6 @@
 export const servicesTypes = {
                 "Bathroom" : "Bathroom",
-                "Wifi" : "Wifi",
+                "WiFi" : "WiFi",
                 "ATM" : "ATM",
                 "Workstation" : "Workstation",
                 "ChargingStation" : "Charging",
