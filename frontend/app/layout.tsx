@@ -1,12 +1,38 @@
-import type { Metadata } from 'next'
+'use client'
  
 // These styles apply to every route in the application
 import './globals.css'
  
-export const metadata: Metadata = {
-  title: 'FreeNearMe App',
-  description: 'Find and share free services in your neighborhood.',
-}
+import '@rainbow-me/rainbowkit/styles.css';
+
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import {
+  foundry, sepolia
+} from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
+
+const { chains, publicClient } = configureChains(
+  [foundry, sepolia],
+  [
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'FreeNearMe',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECTID,
+  chains
+});
+
+const wagmiConfig = createConfig({
+  autoConnect: false,
+  connectors,
+  publicClient
+})
 
 export default function RootLayout({
     children,
@@ -21,7 +47,11 @@ export default function RootLayout({
         </head>
         <body>
           <main className="flex-1 space-y-4 p-8 pt-6">
-          {children}
+          <WagmiConfig config={wagmiConfig}>
+              <RainbowKitProvider chains={chains}>
+              {children}
+              </RainbowKitProvider>
+            </WagmiConfig>
           </main>
         </body>
       </html>
