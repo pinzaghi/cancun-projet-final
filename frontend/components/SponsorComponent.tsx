@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function SponsorComponent() {
-    const [sponsorAddress, setSponsorAddress] = useState(null);
+    const [sponsorAddress, setSponsorAddress] = useState("");
 
     const { toast } = useToast()
 
     function submitNewService() {
-        if(sponsorAddress===null){
+        if(sponsorAddress===""){
             toast({
                 variant: "destructive",
                 title: "No address specified",
