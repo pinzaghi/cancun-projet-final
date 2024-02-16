@@ -1,10 +1,15 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ServicesSearchControls from "@/components/ServicesSearchControls";
 import SponsorComponent from "@/components/SponsorComponent";
 import NewServiceComponent from "@/components/NewServiceComponent";
+import ServicesMapRenderer from "@/components/ServicesMapRenderer";
+
+import { Radar } from 'lucide-react';
+import { Separator } from "@/components/ui/separator"
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import {
     Card,
@@ -13,31 +18,95 @@ import {
     CardTitle
   } from "@/components/ui/card"
 
-import ServicesMapRenderer from "@/components/ServicesMapRenderer";
+import { 
+    servicesTypeIndex, 
+    contractAddress, 
+    contractBlock, 
+    coordinatesPrecision, 
+    abi } from '@/constants'
+import { parseAbiItem } from 'viem'
+import { getPublicClient } from '@wagmi/core'
+import { useAccount } from 'wagmi'
+import { LatLng } from 'leaflet';
 
 export default function SercheableServiceMap() {
     const [services, setServices] = useState<number[][]>([]);
     const [servicesKind, setServicesKind] = useState(null);
     const [newServiceLocation, setNewServiceLocation] = useState(null);
 
-     const serviceSearch = (serviceKind, serviceDesc) => {
-        if(serviceDesc != ""){
+    // Viem public client déjà défini dans le layout 
+    const client = getPublicClient();
+    const { address, isConnected } = useAccount();
 
-        }else{
-            setServicesKind(serviceKind);
-            if(serviceKind === "Bathroom"){
-                setServices([[48.860673, 2.337514], [48.842946, 2.321943]]);
-            }else{
-                setServices([[48.873786, 2.294293]]);
+    const syncServices = async(serviceType) => {
+        console.log(Number(servicesTypeIndex[serviceType]));
+        const abiEvent = "event ServiceRegistered( \
+                                    uint serviceId, \
+                                    string desc, \
+                                    int64 lat, \
+                                    int64 long, \
+                                    int16 indexed citylat, \
+                                    int16 indexed citylong, \
+                                    uint8 indexed kind)";
+                                    
+        const logs = await client.getLogs({
+            event: parseAbiItem(abiEvent),
+            fromBlock: contractBlock,
+            toBlock: BigInt(100000),
+            args: { 
+                kind: Number(servicesTypeIndex[serviceType])
+              }
+        })    
+        console.log(logs);
+ 
+        let data = []
+        let servicesMarkers = []
+        for (let i = 0; i < logs.length; i++) {
+            const parsedLat = Number(logs[i].args.lat)/coordinatesPrecision;
+            const parsedLong = Number(logs[i].args.long)/coordinatesPrecision;
+            const latlong = new LatLng(parsedLat, parsedLong);
+            data = [...data, { 
+                                serviceId: logs[i].args.serviceId,
+                                desc: logs[i].args.desc,
+                                lat: parsedLat,
+                                long: parsedLong,
+                                citylat: logs[i].args.citylat,
+                                citylong: logs[i].args.citylong,
+                                kind: logs[i].args.kind,
+                            }
+            
+            ];
+            if(servicesTypeIndex[serviceType] == logs[i].args.kind){
+                servicesMarkers.push(latlong)
             }
+            
         }
+        if(logs.length > 0){
+            setServices(servicesMarkers)
+        }else{
+            setServices([])
+        }
+        setServicesKind(serviceType);
+    }
+
+    const serviceSearch = async(serviceKind, serviceDesc) => {
+        await syncServices(serviceKind);
     }
 
     const markerHandler = (location) => {
         setNewServiceLocation(location);
     }
 
-    return  <>
+    return  <>  
+                <div className="flow-root">
+                    <span className="flex items-center float-left">
+                        <Radar className="mr-2"/> 
+                        <span className="font-bold">FreeNearMe</span>
+                    </span>
+                    <span className="float-right mb-2"><ConnectButton /></span>
+                </div>
+                
+                <Separator className="mb-2"/>
                 <div className="grid xl:grid-cols-4 gap-4">
                     <Card className="xl:order-1 order-2 xl:col-span-3">
                         <CardContent>

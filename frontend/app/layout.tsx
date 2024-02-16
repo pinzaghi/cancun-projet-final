@@ -47,9 +47,9 @@ export default function RootLayout({
         </head>
         <body>
           <main className="flex-1 space-y-4 p-8 pt-6">
-          <WagmiConfig config={wagmiConfig}>
+            <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider chains={chains}>
-              {children}
+                {children}
               </RainbowKitProvider>
             </WagmiConfig>
           </main>
