@@ -32,8 +32,7 @@ export default function SponsorComponent() {
                         <Input 
                             value={sponsorAddress} 
                             placeholder="Address to sponsor" 
-                            className="mr-2" 
-                            id="address"
+                            className="mr-2"
                             onChange = {(event)=> setSponsorAddress(event.target.value)} /> 
                         <Button onClick={() => submitNewService()}>Submit</Button>
                     </div>

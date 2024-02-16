@@ -51,8 +51,7 @@ export default function NewServiceComponent({newServiceLocation}) {
                     
                     <Input 
                         placeholder="Description" 
-                        className="mr-2" 
-                        id="address"
+                        className="mr-2"
                         onChange = {(event)=> setServiceDesc(event.target.value)} /> 
                     <Button onClick={() => submitNewService()}>Submit</Button>
                 </div>
