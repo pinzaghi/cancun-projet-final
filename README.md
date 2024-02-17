@@ -1,5 +1,15 @@
 # FreeNearMe
 
+A decentralized app for searching and sharing free services in your city.
+
+- Smart contract deployed to testnet Sepolia: https://sepolia.etherscan.io/address/0x053DDeE2A3899f34205b9c695EAB223d049A023b
+- Frontend deployed to Vercel: https://cancun-projet-final.vercel.app/
+
+It allows you to:
+- Search services in the map by category
+- Submit new services with an optional description. You need to be coopted by a member to perform this action.
+- Invite new users to the app
+
 ## Installation
 
 ```shell
@@ -38,10 +48,11 @@ touch backend/.env
 Set the constants:
 ```
 SEPOLIA_RPC_URL={e.g., Alchemy App API Key}
+ETHERSCAN_API_KEY={Etherscan api key}
+
 PRIVATE_KEY={Anvil private key if local, wallet private key if testnet}
 PUBLIC_CONTRACT_ADDRESS=
-ETHERSCAN_API_KEY={Etherscan api key}
-SEED_ADDRESS_VALUES={A list of comma separated public addresses}
+SEED_ADDRESS_VALUES={A list of comma separated public addresses to sponsor}
 ```
 
 Deploy locally:
@@ -79,4 +90,11 @@ Submit service script (local):
 $ cd backend/
 $ anvil
 $ forge script script/SubmitService.s.sol:SubmitServiceScript --fork-url http://localhost:8545 --broadcast
+```
+
+Submit service script (Sepolia):
+```shell
+$ cd backend/
+$ anvil
+$ forge script script/SubmitService.s.sol:SubmitServiceScript --rpc-url $SEPOLIA_RPC_URL --etherscan-api-key $ETHERSCAN_API_KEY --broadcast --verify -vvvv
 ```
