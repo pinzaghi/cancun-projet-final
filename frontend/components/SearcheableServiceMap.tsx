@@ -27,6 +27,7 @@ import { parseAbiItem } from 'viem'
 import { getPublicClient } from '@wagmi/core'
 import { useAccount } from 'wagmi'
 import { LatLng } from 'leaflet';
+import { toast } from './ui/use-toast';
 
 export default function SercheableServiceMap() {
     const [services, setServices] = useState<number[][]>([]);
@@ -86,6 +87,10 @@ export default function SercheableServiceMap() {
         }else{
             setServices([])
         }
+
+        toast({
+            title: "We found "+servicesMarkers.length+" services with your criteria.",
+        })
     }
 
     const serviceSearch = async(serviceKind) => {
@@ -97,7 +102,6 @@ export default function SercheableServiceMap() {
     }
 
     const _getUserSponsoredEvents = async() => {
-        // get all the ProposalsRegistered events 
         const logs = await client.getLogs({
             event: parseAbiItem('event UserSponsored(address indexed addr)'),
             fromBlock: contractBlock,

@@ -29,8 +29,8 @@ export default function SponsorComponent() {
                 variant: "destructive",
                 title: "No address specified",
                 description: "Enter the user's public address to sponsor.",
-              })
-              return;
+            })
+            return;
         }
 
         try{            
