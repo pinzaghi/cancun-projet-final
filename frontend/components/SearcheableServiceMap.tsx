@@ -77,7 +77,7 @@ export default function SercheableServiceMap() {
             
             ];
             if(servicesTypeIndex[serviceType] == logs[i].args.kind){
-                servicesMarkers.push(latlong)
+                servicesMarkers.push({desc: logs[i].args.desc, latlng: latlong})
             }
             
         }

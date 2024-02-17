@@ -68,8 +68,10 @@ function ServiceMarkers({markers, markersKind}) {
       icon = iconChargingStation;
   }
 
-  return markers.map((position, index) => (
-      <Marker key={index} position={position} icon={icon}></Marker>
+  return markers.map((marker, index) => (
+      <Marker key={marker.latlng} position={marker.latlng} icon={icon}>
+        <Popup>{marker.desc}</Popup>
+      </Marker>
     ))
 }
 
