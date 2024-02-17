@@ -36,7 +36,6 @@ export default function SercheableServiceMap() {
 
     // Viem public client déjà défini dans le layout 
     const client = getPublicClient();
-    const { address, isConnected } = useAccount();
 
     const syncServices = async(serviceType) => {
         console.log(Number(servicesTypeIndex[serviceType]));

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 import { useAccount } from 'wagmi'
-import { prepareWriteContract, writeContract, readContract, waitForTransaction, getPublicClient } from '@wagmi/core'
+import { writeContract, waitForTransaction, getPublicClient } from '@wagmi/core'
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -15,7 +15,7 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 
-  import { 
+import { 
     servicesTypes, 
     servicesTypeIndex, 
     contractAddress, 
@@ -31,7 +31,6 @@ export default function NewServiceComponent({newServiceLocation}) {
     const { toast } = useToast()
 
     // Viem public client déjà défini dans le layout 
-    const client = getPublicClient();
     const { address, isConnected } = useAccount();
 
     async function submitNewService() {
