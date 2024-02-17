@@ -77,6 +77,7 @@ contract FreeNearMe {
     /// @dev citylat and citylong are coordinates truncated to first decimal, this means aprox 11km precision 
     event ServiceRegistered(uint serviceId, string desc, int64 lat, int64 long, int16 indexed citylat, int16 indexed citylong, ServiceType indexed kind);
     event ServiceUpdate(uint indexed serviceId, string desc, uint256 timestamp);
+    event UserSponsored(address indexed addr);
     
     /// @dev We start the contract with a seed of trusted users.
     constructor(uint8 _minSponsors, address[] memory initialAddresses) {
@@ -171,5 +172,7 @@ contract FreeNearMe {
     function sponsorUser(address addressToSponsor) external onlySponsored {
         require(sponsorsGiven[msg.sender][addressToSponsor] == false, "You already sponsored this user.");
         _sponsorUser(addressToSponsor, msg.sender);
+        
+        emit UserSponsored(addressToSponsor);
     }
 }
