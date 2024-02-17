@@ -10,7 +10,7 @@ import { writeContract, waitForTransaction, getPublicClient } from '@wagmi/core'
 
 import { 
     servicesTypes, 
-    servicesTypeIndex, 
+    servicesTypeIdByString, 
     contractAddress, 
     contractBlock, 
     abi } from '@/constants'

@@ -96,5 +96,26 @@ const iconWater = new L.Icon({
     className: 'leaflet-div-icon'
 });
 
+const iconRadar = new L.Icon({
+    iconUrl: '/static/icons/radar.svg',
+    iconRetinaUrl: null,
+    iconAnchor: null,
+    popupAnchor: [0, 0],
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: new L.Point(30, 30),
+    className: 'leaflet-div-icon'
+});
 
-export { iconBathroom, iconWifi, iconATM, iconWorkstation, iconChargingStation, iconAirPump, iconBikeWorkshop, iconWater };
+
+export { 
+    iconBathroom, 
+    iconWifi, 
+    iconATM, 
+    iconWorkstation, 
+    iconChargingStation, 
+    iconAirPump, 
+    iconBikeWorkshop, 
+    iconWater, 
+    iconRadar };

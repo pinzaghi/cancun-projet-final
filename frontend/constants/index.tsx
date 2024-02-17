@@ -10,7 +10,7 @@ export const servicesTypes = {
 				"Other" : "Other",
             };
 			
-export const servicesTypeIndex = {
+export const servicesTypeIdByString = {
 	"Bathroom" : 0,
 	"Water" : 1,
 	"WiFi" : 2,
@@ -20,6 +20,17 @@ export const servicesTypeIndex = {
 	"ATM" : 6,
 	"ChargingStation" : 7,
 	"Other" : 8,
+};
+export const servicesTypeStringById = {
+	0: "Bathroom",
+	1: "Water",
+	2: "WiFi",
+	3: "AirPump",
+	4: "BikeWorkshop",
+	5: "Workstation",
+	6: "ATM",
+	7: "ChargingStation",
+	8: "Other",
 };
 export const coordinatesPrecision = 1000000;
 export const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;

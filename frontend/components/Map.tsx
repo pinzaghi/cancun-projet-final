@@ -20,7 +20,10 @@ import {
   iconAirPump,
   iconWorkstation,
   iconATM,
-  iconChargingStation} from '@/components/Icons';
+  iconChargingStation,
+  iconRadar} from '@/components/Icons';
+
+import { servicesTypeStringById } from '@/constants'
 
 function LocationMarker() {
   const [position, setPosition] = useState(null)
@@ -39,10 +42,11 @@ function LocationMarker() {
   return null
 }
 
-function ServiceMarkers({markers, markersKind}) {
-  let icon = iconBathroom;
-
-  switch (markersKind) {
+function getIcon(serviceTypeId){
+  const serviceTypeStr = servicesTypeStringById[serviceTypeId];
+  let icon = iconRadar;
+  
+  switch (serviceTypeStr) {
     case "Bathroom":
       icon = iconBathroom;
       break;
@@ -67,9 +71,12 @@ function ServiceMarkers({markers, markersKind}) {
     case "ChargingStation":
       icon = iconChargingStation;
   }
+  return icon;
+}
 
+function ServiceMarkers({markers}) {
   return markers.map((marker, index) => (
-      <Marker key={marker.latlng} position={marker.latlng} icon={icon}>
+      <Marker key={marker.latlng} position={marker.latlng} icon={getIcon(marker.type)}>
         <Popup>{marker.desc}</Popup>
       </Marker>
     ))
@@ -93,7 +100,7 @@ function AddMarker({markerHandler}) {
   )
 }
 
-export default function Map({markers, markersKind, markerHandler}) {
+export default function Map({markers, markerHandler}) {
   return (
         <MapContainer 
           center={[48.8551921,2.3415163]} 
@@ -105,7 +112,7 @@ export default function Map({markers, markersKind, markerHandler}) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
-        <ServiceMarkers markers={markers} markersKind={markersKind} />
+        <ServiceMarkers markers={markers}/>
         <LocationMarker />
         <AddMarker markerHandler={markerHandler}/>
       </MapContainer>

@@ -19,7 +19,7 @@ import {
   } from "@/components/ui/card"
 
 import { 
-    servicesTypeIndex, 
+    servicesTypeIdByString, 
     contractAddress, 
     contractBlock, 
     coordinatesPrecision, 
@@ -54,10 +54,10 @@ export default function SercheableServiceMap() {
             fromBlock: contractBlock,
             toBlock: BigInt(100000),
             args: { 
-                kind: Number(servicesTypeIndex[serviceType])
+                kind: Number(servicesTypeIdByString[serviceType])
               }
         })    
-        console.log(logs.length);
+        console.log("Service events found: ", logs.length);
  
         let data = []
         let servicesMarkers = []
@@ -76,8 +76,11 @@ export default function SercheableServiceMap() {
                             }
             
             ];
-            if(servicesTypeIndex[serviceType] == logs[i].args.kind){
-                servicesMarkers.push({desc: logs[i].args.desc, latlng: latlong})
+            if(servicesTypeIdByString[serviceType] == logs[i].args.kind){
+                servicesMarkers.push({
+                                    desc: logs[i].args.desc, 
+                                    latlng: latlong,
+                                    type: logs[i].args.kind})
             }
             
         }
@@ -89,7 +92,7 @@ export default function SercheableServiceMap() {
         setServicesKind(serviceType);
     }
 
-    const serviceSearch = async(serviceKind, serviceDesc) => {
+    const serviceSearch = async(serviceKind) => {
         await syncServices(serviceKind);
     }
 
@@ -136,7 +139,7 @@ export default function SercheableServiceMap() {
                 <div className="grid xl:grid-cols-4 gap-4">
                     <Card className="xl:order-1 order-2 xl:col-span-3">
                         <CardContent>
-                            <ServicesMapRenderer markers={services} markersKind={servicesKind} markerHandler={markerHandler}/>
+                            <ServicesMapRenderer markers={services} markerHandler={markerHandler}/>
                         </CardContent>
                     </Card>
                     <div className="grid xl:grid-cols-1 gap-4 xl:order-1">

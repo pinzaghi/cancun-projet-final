@@ -17,7 +17,7 @@ import {
 
 import { 
     servicesTypes, 
-    servicesTypeIndex, 
+    servicesTypeIdByString, 
     contractAddress, 
     contractBlock, 
     coordinatesPrecision,
@@ -54,14 +54,12 @@ export default function NewServiceComponent({newServiceLocation}) {
   
 
         try{            
-            console.log(Math.trunc(newServiceLocation[0]*coordinatesPrecision));
-            console.log(Math.trunc(newServiceLocation[1]*coordinatesPrecision));
             const { hash } = await writeContract({
                 address: contractAddress,
                 abi: abi,
                 functionName: "submitService",
                 args: [
-                    servicesTypeIndex[serviceType], 
+                    servicesTypeIdByString[serviceType], 
                     serviceDesc, 
                     Math.trunc(newServiceLocation[0]*coordinatesPrecision), 
                     Math.trunc(newServiceLocation[1]*coordinatesPrecision)],
