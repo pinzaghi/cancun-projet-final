@@ -100,6 +100,8 @@ contract FreeNearMe {
         require(addressToSponsor != address(0), "Invalid address.");
         sponsorsReceived[addressToSponsor]++;
         sponsorsGiven[sponsorAddress][addressToSponsor] = true;
+        
+        emit UserSponsored(addressToSponsor);
     }
 
     /**
@@ -172,7 +174,5 @@ contract FreeNearMe {
     function sponsorUser(address addressToSponsor) external onlySponsored {
         require(sponsorsGiven[msg.sender][addressToSponsor] == false, "You already sponsored this user.");
         _sponsorUser(addressToSponsor, msg.sender);
-        
-        emit UserSponsored(addressToSponsor);
     }
 }
