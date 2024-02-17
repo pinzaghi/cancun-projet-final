@@ -7,6 +7,7 @@ export const servicesTypes = {
                 "AirPump" : "Air pump",
                 "BikeWorkshop" : "Bike SOS",
                 "Water" : "Water",
+				"Other" : "Other",
             };
 			
 export const servicesTypeIndex = {
