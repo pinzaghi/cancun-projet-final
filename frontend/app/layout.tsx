@@ -15,8 +15,14 @@ import {
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
+let networks = [];
+if(process.env.NODE_ENV == 'development'){
+  networks = [foundry];
+}else{
+  networks = [sepolia];
+}
 const { chains, publicClient } = configureChains(
-  [foundry, sepolia],
+  networks,
   [
     publicProvider()
   ]
