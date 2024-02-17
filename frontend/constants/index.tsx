@@ -115,6 +115,19 @@ export const abi = [
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "UserSponsored",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
