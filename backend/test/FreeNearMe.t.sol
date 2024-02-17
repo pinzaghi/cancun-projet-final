@@ -95,7 +95,7 @@ contract CounterTest is Test {
 
     function test_ExpectEmit_SubmitService() public {
         vm.expectEmit(true, true, true, true);
-        emit FreeNearMe.ServiceRegistered(0, "", 48825077, 2291092, 488, 22, ServiceType.Bathroom);
+        emit FreeNearMe.ServiceRegistered(0, service1.desc, service1.lat, service1.long, 488, 22, service1.kind);
 
         vm.prank(user1);
         fnm.submitService(service1.kind, service1.desc, service1.lat, service1.long);
