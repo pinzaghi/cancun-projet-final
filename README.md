@@ -13,7 +13,7 @@ npm install
 
 Create a .env file:
 ```shell
-touch backend/.env
+touch frontend/.env
 ```
 
 Set the constants:

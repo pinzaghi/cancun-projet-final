@@ -23,7 +23,7 @@ export default function ServicesSearchControls({serviceSearch}) {
     return (
         <div className="grid md:grid-cols-1 gap-4 mt-4">  
             <span className="font-bold">Select a service:</span>
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-9 xl:grid-cols-3 gap-4">
                 <Button variant="outline" onClick={() => serviceToDisplay("Bathroom")}> <Users/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Bathroom</span> </Button>
                 <Button variant="outline" onClick={() => serviceToDisplay("WiFi")}> <Wifi/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">WiFi</span> </Button>
                 <Button variant="outline" onClick={() => serviceToDisplay("Water")}> <GlassWater/> <span className="hidden sm:block lg:hidden xl:hidden 3xl:block">Water</span> </Button>

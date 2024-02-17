@@ -132,13 +132,13 @@ export default function SercheableServiceMap() {
                 </div>
                 
                 <Separator className="mb-2"/>
-                <div className="grid xl:grid-cols-4 gap-4">
-                    <Card className="xl:order-1 order-2 xl:col-span-3">
+                <div className="grid xl:grid-cols-6 gap-4">
+                    <Card className="xl:order-1 order-2 xl:col-span-4">
                         <CardContent>
                             <ServicesMapRenderer markers={services} markerHandler={markerHandler}/>
                         </CardContent>
                     </Card>
-                    <div className="grid xl:grid-cols-1 gap-4 xl:order-1">
+                    <div className="grid xl:grid-cols-1 gap-4 xl:order-1 xl:col-span-2">
                         <Card>
                             <CardHeader>
                                 <CardTitle>Find services</CardTitle>
