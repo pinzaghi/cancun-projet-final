@@ -20,10 +20,9 @@ import {
 
 import { 
     servicesTypeIdByString, 
-    contractAddress, 
     contractBlock, 
-    coordinatesPrecision, 
-    abi } from '@/constants'
+    coordinatesPrecision } from '@/constants'
+
 import { parseAbiItem } from 'viem'
 import { getPublicClient } from '@wagmi/core'
 import { useAccount } from 'wagmi'
@@ -31,7 +30,6 @@ import { LatLng } from 'leaflet';
 
 export default function SercheableServiceMap() {
     const [services, setServices] = useState<number[][]>([]);
-    const [servicesKind, setServicesKind] = useState(null);
     const [newServiceLocation, setNewServiceLocation] = useState(null);
     const [isSponsored, setIsSponsored] = useState(false);
 
@@ -52,7 +50,6 @@ export default function SercheableServiceMap() {
         const logs = await client.getLogs({
             event: parseAbiItem(abiEvent),
             fromBlock: contractBlock,
-            toBlock: BigInt(100000),
             args: { 
                 kind: Number(servicesTypeIdByString[serviceType])
               }
@@ -89,7 +86,6 @@ export default function SercheableServiceMap() {
         }else{
             setServices([])
         }
-        setServicesKind(serviceType);
     }
 
     const serviceSearch = async(serviceKind) => {

@@ -30,7 +30,6 @@ function LocationMarker() {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng)
-      //TODO: remove comment
       //map.flyTo(e.latlng, map.getZoom())
     },
   })

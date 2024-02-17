@@ -18,8 +18,7 @@ import {
 import { 
     servicesTypes, 
     servicesTypeIdByString, 
-    contractAddress, 
-    contractBlock, 
+    contractAddress,
     coordinatesPrecision,
     abi } from '@/constants'
 
