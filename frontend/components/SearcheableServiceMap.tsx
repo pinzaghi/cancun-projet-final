@@ -33,12 +33,13 @@ export default function SercheableServiceMap() {
     const [services, setServices] = useState<number[][]>([]);
     const [servicesKind, setServicesKind] = useState(null);
     const [newServiceLocation, setNewServiceLocation] = useState(null);
+    const [isSponsored, setIsSponsored] = useState(false);
 
     // Viem public client déjà défini dans le layout 
     const client = getPublicClient();
+    const { address, isConnected } = useAccount();
 
     const syncServices = async(serviceType) => {
-        console.log(Number(servicesTypeIndex[serviceType]));
         const abiEvent = "event ServiceRegistered( \
                                     uint serviceId, \
                                     string desc, \
@@ -56,7 +57,7 @@ export default function SercheableServiceMap() {
                 kind: Number(servicesTypeIndex[serviceType])
               }
         })    
-        console.log(logs);
+        console.log(logs.length);
  
         let data = []
         let servicesMarkers = []
@@ -96,6 +97,32 @@ export default function SercheableServiceMap() {
         setNewServiceLocation(location);
     }
 
+    const _getUserSponsoredEvents = async() => {
+        // get all the ProposalsRegistered events 
+        const logs = await client.getLogs({
+            event: parseAbiItem('event UserSponsored(address indexed addr)'),
+            fromBlock: contractBlock,
+            args: {
+                addr : address
+            }
+        })
+        console.log("User is sponsored ", logs.length === 1);
+        if(logs.length === 1){
+            setIsSponsored(true)
+        }else{
+            setIsSponsored(false)
+        }
+    }
+
+    useEffect(() => {
+        const getUserSponsoredEvents = async() => {
+            if(isConnected) {
+                await _getUserSponsoredEvents()
+            }
+        }
+        getUserSponsoredEvents();
+    }, [address])
+
     return  <>  
                 <div className="flow-root">
                     <span className="flex items-center float-left">
@@ -121,22 +148,26 @@ export default function SercheableServiceMap() {
                                 <ServicesSearchControls serviceSearch={serviceSearch}/>
                             </CardContent>
                         </Card>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Add a service</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <NewServiceComponent newServiceLocation={newServiceLocation}/>
-                            </CardContent>
-                        </Card>                    
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Sponsor a user</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <SponsorComponent/>
-                            </CardContent>
-                        </Card>
+                        { isSponsored &&
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Add a service</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <NewServiceComponent newServiceLocation={newServiceLocation}/>
+                                </CardContent>
+                            </Card>
+                        }
+                        { isSponsored &&                     
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Sponsor a user</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <SponsorComponent/>
+                                </CardContent>
+                            </Card>
+                        }
                     </div>
                 </div>
             </>
